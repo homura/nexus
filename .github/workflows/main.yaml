@@ -49,6 +49,9 @@ jobs:
       - name: Prepare repository
         run: git fetch --unshallow --prune --tags
 
+      - name: Unset header
+        run: git config --local --unset http.https://github.com/.extraheader
+
       - name: Build extension
         run: |
           npm run build:libs
