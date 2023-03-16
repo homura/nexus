@@ -87,7 +87,7 @@
   "auto": {
     "plugins": [
       "magic-zero",
-      "npm",
+      "git-tag",
       "released",
       [
         "upload-assets",
