@@ -20,10 +20,12 @@ void createDaemonWatchtower(factory).run();
 
 // listen message from content script
 onMessage('rpc', async ({ data, sender }) => {
-  logger.info(`RPC start`, data);
+  logger.info(`RPC start`);
+  logger.debug(data);
   try {
     const result = await server.handleRequest({ request: data, sender: sender });
-    logger.info(`RPC end`, result);
+    logger.info(`RPC end`);
+    logger.debug(result);
     return result;
   } catch (error) {
     throw error;
