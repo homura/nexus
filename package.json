@@ -86,14 +86,15 @@
   "auto": {
     "plugins": [
       "magic-zero",
-      "npm",
-      "released",
+      "./scripts/build-extension.ts",
       [
         "upload-assets",
         [
           "packages/extension-chrome/nexus.zip"
         ]
-      ]
+      ],
+      "npm",
+      "released"
     ],
     "labels": [
       {
