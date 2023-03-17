@@ -1,3 +1,15 @@
+# v0.0.5 (Fri Mar 17 2023)
+
+#### 🚀 Enhancement
+
+- chore: verbose build info [#10](https://github.com/homura/nexus/pull/10) ([@homura](https://github.com/homura))
+
+#### Authors: 1
+
+- Yonghui Lin ([@homura](https://github.com/homura))
+
+---
+
 # v0.0.4 (Fri Mar 17 2023)
 
 #### 🚀 Enhancement
