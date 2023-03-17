@@ -14,8 +14,13 @@ export default class BuildExtension implements IPlugin {
   }
 
   private buildNexusExtension(auto: Auto): Promise<void> {
-    return new Promise((resolve) => {
-      const build = spawn('npm', ['run', 'build:extension-chrome']);
+    return new Promise((resolve, reject) => {
+      const build = spawn(
+        `npm run build:libs && npm run build:extension-chrome && npm run -w @nexus-wallet/extension-chrome zip`,
+        {
+          shell: true,
+        },
+      );
 
       build.stdout.on('data', (data) => {
         auto.logger.verbose.info(data.toString());
@@ -25,9 +30,14 @@ export default class BuildExtension implements IPlugin {
         auto.logger.verbose.info(data.toString());
       });
 
-      build.on('close', () => {
+      build.on('close', (code) => {
         auto.logger.log.info('Nexus extension built successfully.');
-        resolve();
+
+        if (code) {
+          reject();
+        } else {
+          resolve();
+        }
       });
     });
   }
