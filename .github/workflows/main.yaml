@@ -53,19 +53,19 @@ jobs:
         run: git config --local --unset http.https://github.com/.extraheader
 
       # TODO: remove this step after testing
-      - name: Restore build extension
-        uses: actions/cache@v3
-        id: restore_build_extension
-        with:
-          path: 'packages/extension-chrome/nexus.zip'
-          key: ${{ runner.os }}-${{ hashFiles('packages/*/src') }}
+      #      - name: Restore build extension
+      #        uses: actions/cache@v3
+      #        id: restore_build_extension
+      #        with:
+      #          path: 'packages/extension-chrome/nexus.zip'
+      #          key: ${{ runner.os }}-${{ hashFiles('packages/*/src') }}
 
-      - name: Build extension
-        if: steps.restore_build_extension.outputs.cache-hit != 'true'
-        run: |
-          npm run build:libs
-          npm run build:extension-chrome
-          npm run -w @nexus-wallet/extension-chrome zip
+      #      - name: Build extension
+      #        if: steps.restore_build_extension.outputs.cache-hit != 'true'
+      #        run: |
+      #          npm run build:libs
+      #          npm run build:extension-chrome
+      #          npm run -w @nexus-wallet/extension-chrome zip
 
       - name: Create Release
         run: npx auto shipit -vv
