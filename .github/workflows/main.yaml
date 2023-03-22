@@ -6,6 +6,19 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+# Enabled permissions on GITHUB_TOKEN
+permissions:
+  # To be able to push to the repo
+  contents: write
+  # To update the pr description with canary info
+  pull-requests: write
+  # For pr-check to create a status
+  statuses: write
+  # Needed to create PR statuses/checks
+  checks: write
+  # To post comments on PRs
+  issues: write
+
 jobs:
   unit-test:
     runs-on: ubuntu-latest
@@ -26,9 +39,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
-        # TODO: uncomment this step after testing
-      #      - name: Run unit test with coverage
-      #        run: npx jest --coverage --verbose
+
+      - name: Run unit test with coverage
+        run: npx jest --coverage --verbose
 
       - uses: codecov/codecov-action@v3
         with:
@@ -52,22 +65,8 @@ jobs:
       - name: Unset header
         run: git config --local --unset http.https://github.com/.extraheader
 
-      # TODO: remove this step after testing
-      #      - name: Restore build extension
-      #        uses: actions/cache@v3
-      #        id: restore_build_extension
-      #        with:
-      #          path: 'packages/extension-chrome/nexus.zip'
-      #          key: ${{ runner.os }}-${{ hashFiles('packages/*/src') }}
-
-      #      - name: Build extension
-      #        if: steps.restore_build_extension.outputs.cache-hit != 'true'
-      #        run: |
-      #          npm run build:libs
-      #          npm run build:extension-chrome
-      #          npm run -w @nexus-wallet/extension-chrome zip
-
+      # when shipit is triggered, it will run hooks in `scripts/build-extension.ts` to build the extension
       - name: Create Release
         run: npx auto shipit -vv
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
