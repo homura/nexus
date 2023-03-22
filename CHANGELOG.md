@@ -1,3 +1,16 @@
+# v0.0.6 (Wed Mar 22 2023)
+
+#### 🐛 Bug Fix
+
+- chore: cannot release since empty github config [#12](https://github.com/homura/nexus/pull/12) ([@homura](https://github.com/homura))
+- chore: fix build failed in workflow [#11](https://github.com/homura/nexus/pull/11) ([@homura](https://github.com/homura))
+
+#### Authors: 1
+
+- Yonghui Lin ([@homura](https://github.com/homura))
+
+---
+
 # v0.0.5 (Fri Mar 17 2023)
 
 #### 🚀 Enhancement
